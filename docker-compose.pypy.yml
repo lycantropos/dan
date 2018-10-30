@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  dan-pypy:
+    build:
+      context: .
+      args:
+      - PYTHON_IMAGE=${PYPY_IMAGE_NAME}
+      - PYTHON_IMAGE_VERSION=${PYPY_IMAGE_VERSION}
+    image: lycantropos/dan-pypy:0.0.0
+    volumes:
+      - ./dan/:/opt/dan/dan/
+      - ./tests/:/opt/dan/tests/
+      - ./README.md:/opt/dan/README.md
+      - ./setup.py:/opt/dan/setup.py
+      - ./setup.cfg:/opt/dan/setup.cfg
+    entrypoint: pypy3
+    command: setup.py test
